@@ -1,20 +1,27 @@
-class Solution {
-public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        int n = sizeof(nums)/sizeof(nums[0]);
-        sort(nums.begin(), nums.end());
+    class Solution {
+    public:
+        void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+            int i = m -1;
+            int j = n -1;
+            int last = m + n -1;
 
-        int low = 0;
-        int high = n - 1;
-
-        while(low < high){
-            if(nums[low] + nums[high] == target){
-                return {low, high};
+            while(i >= 0 && j >= 0){
+                if(nums1[i] > nums2[j]){
+                    nums1[last] = nums1[i];
+                    i--;
+                } else {
+                    nums1[last] = nums2[j];
+                    j--;
+                }
+                last--;
             }
 
-            (nums[low] + nums[high] < target) ? low++ : high--;
-        }
 
-        return {};
-    }
-};
+            while(j > 0){
+                nums1[last] = nums2[j];
+                 j = j - 1;
+                last = last - 1;
+            }
+
+        }
+    };
